@@ -1,0 +1,32 @@
+<div class="content">
+  <div>
+    <h2>{{model.category + ' > ' + model.title}}</h2>
+    <span><i>{{model.author}}</i></span>
+  </div>
+  <div class="content-body">
+    <div flex fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="15px" fxLayoutGap.sm="0px">
+      <div fxFlex=60>
+        <mat-card>
+          <div [innerHTML]="model.content"></div>
+        </mat-card>
+      </div>
+      <div fxFlex=40 *ngIf="model && model.options">
+        <mat-card>
+          <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+            [(ngModel)]="model.selected">
+            <mat-radio-button class="example-radio-button" *ngFor="let op of model.options" [value]="op.code">
+              <span>{{op.code + ': ' +  op.text}}</span>
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-card>
+      </div>
+    </div>
+    <section>
+      <div class="example-button-row">
+        <button mat-stroked-button>Back</button>
+        <button mat-stroked-button color="primary">Next</button>
+      </div>
+    </section>
+  </div>
+
+</div>

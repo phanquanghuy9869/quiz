@@ -1,0 +1,108 @@
+<div class="content">
+    <div>
+        <h2>Create Question</h2>
+        <i>Get started by providing the initial details needed to create a question.</i>
+    </div>
+    <div class="content-body" *ngIf="model">
+        <div flex fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="15px" fxLayoutGap.sm="0px">
+            <div fxFlex=50>
+                <mat-form-field class="full-width">
+                    <mat-label>Title</mat-label>
+                    <input matInput #message maxlength="256" minlength="50" [(ngModel)]="model.title"
+                        placeholder="Question title/name...">
+                    <mat-hint align="start"><strong>Don't disclose personal info</strong> </mat-hint>
+                    <mat-hint align="end">{{model.title?model.title.length: 0}} / 256</mat-hint>
+                </mat-form-field>
+            </div>
+            <div fxFlex=25>
+                <mat-form-field class="full-width">
+                    <mat-label>Level</mat-label>
+                    <input matInput #message maxlength="256" [(ngModel)]="model.level">
+                    <mat-hint align="end">{{model.level?model.level.length : 0}} / 256</mat-hint>
+                </mat-form-field>
+            </div>
+            <div fxFlex=25>
+                <mat-form-field class="full-width">
+                    <mat-label>Category</mat-label>
+                    <input matInput #message maxlength="256" [(ngModel)]="model.category" value="Chemiscal" disabled>
+                </mat-form-field>
+            </div>
+        </div>
+        <div flex fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="15px" fxLayoutGap.sm="0px">
+            <div fxFlex=100>
+                <mat-form-field class="full-width">
+                    <mat-label>Summary</mat-label>
+                    <input matInput #message maxlength="1000" minlength="50" [(ngModel)]="model.summary"
+                        placeholder="Question summary...">
+                    <mat-hint align="start"><strong>A few words summary about the challenge</strong> </mat-hint>
+                    <mat-hint align="end">{{model.summary? model.summary.length : 0}} / 256</mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+        <div flex fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="15px" fxLayoutGap.sm="0px"
+            style="margin-top: 30px;">
+            <div fxFlex=100>
+                <mat-label>Question content</mat-label>
+                <ckeditor [(ngModel)]="model.content" [editor]="editor"></ckeditor>
+            </div>
+        </div>
+        <div flex fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="15px" fxLayoutGap.sm="0px"
+            style="margin-top: 15px;">
+            <div mat-subheader>Answer options: </div>
+            <div class="full-width">
+                <div flex fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="15px" fxLayoutGap.sm="0px"
+                    *ngFor="let op of model.options; let i = index">
+                    <!-- <div> -->
+                    <mat-form-field class="full-width" fxFlex=10>
+                        <mat-label>Code</mat-label>
+                        <input matInput placeholder="Ex. Pizza" [(ngModel)]="op.code">
+                    </mat-form-field>
+                    <mat-form-field class="full-width" fxFlex=69>
+                        <mat-label>Option</mat-label>
+                        <input matInput placeholder="Ex. Pizza" [(ngModel)]="op.text">
+                    </mat-form-field>
+                    <div fxFlex=6>
+                        <button mat-button color="warn">
+                            <span class="material-icons" (click)="removeOption(i)">
+                                clear
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <div flex fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="15px" fxLayoutGap.sm="0px">
+                    <mat-form-field class="full-width" fxFlex=10>
+                        <mat-label>Code</mat-label>
+                        <input matInput placeholder="Ex. Pizza" [(ngModel)]="optionBuffer.code">
+                    </mat-form-field>
+                    <mat-form-field class="full-width" fxFlex=69>
+                        <mat-label>Option</mat-label>
+                        <input matInput placeholder="Ex. Pizza" [(ngModel)]="optionBuffer.text">
+                    </mat-form-field>
+                    <div fxFlex=6>
+                        <button mat-button color="primary" (click)="addOption()">
+                            <span class="material-icons">
+                                add_circle
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div flex fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="15px" fxLayoutGap.sm="0px">
+            <div fxFlex=20>
+                <mat-form-field class="full-width">
+                    <mat-label>Selected answer code</mat-label>
+                    <input matInput #message maxlength="1000" [(ngModel)]="model.resultCode">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="content-footer">
+        <div class="example-button-row">
+            <button mat-stroked-button color="primary" (click)="addOrUpdate()">Submit</button>
+            <button mat-stroked-button>Cancel</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+{
+    "apiUrl": "https://quizonline.azurewebsites.net/",
+    "question": {
+        "getQuestionUrl": "/question",
+        "getQuestionPagingUrl": "/question/paging",
+        "createQuestionUrl": "/question",
+        "updateQuestionUrl": "/question",
+        "deleteQuestionUrl": "/question"
+    }
+}

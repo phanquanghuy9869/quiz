@@ -1,0 +1,100 @@
+<div class="content">
+  <div flex fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="15px" fxLayoutGap.sm="0px">
+    <div fxFlex=20 class="filter">
+      <h3>Filter</h3>
+      <span class="example-list-section" style="padding-top: 20px;">
+        <ul>
+          <li>
+            <mat-checkbox>Solved</mat-checkbox>
+          </li>
+          <li>
+            <mat-checkbox>Unsolved</mat-checkbox>
+          </li>
+        </ul>
+      </span>
+      <mat-divider></mat-divider>
+      <span class="example-list-section" style="padding-top: 20px;">
+        <ul>
+          <li>
+            <mat-checkbox>Solved</mat-checkbox>
+          </li>
+          <li>
+            <mat-checkbox>Unsolved</mat-checkbox>
+          </li>
+        </ul>
+      </span>
+      <mat-divider></mat-divider>
+      <span class="example-list-section" style="padding-top: 20px;">
+        <ul>
+          <li>
+            <mat-checkbox>Easy</mat-checkbox>
+          </li>
+          <li>
+            <mat-checkbox>Medium</mat-checkbox>
+          </li>
+          <li>
+            <mat-checkbox>Hard</mat-checkbox>
+          </li>
+        </ul>
+      </span>
+    </div>
+    <div fxFlex=80>
+      <table mat-table [dataSource]="dataSource">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>
+                  <h2>{{element.title}}</h2>
+                </mat-card-title>
+                <mat-card-subtitle><i>Category: </i>{{element.category}}, <i>Diff: </i> {{element.level}}, <i>Success rate: </i>86%</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p [innerHtml]="element.summary" style="margin-left: 15px">
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <a [routerLink]="['/question',element.id]" target="_blank">
+                  <button mat-stroked-button color="primary">Solve the challenge</button></a>
+              </mat-card-actions>
+            </mat-card>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef> Category </th>
+          <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="author">
+          <th mat-header-cell *matHeaderCellDef> Author </th>
+          <td mat-cell *matCellDef="let element"> {{element.author}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="text">
+          <th mat-header-cell *matHeaderCellDef> Text </th>
+          <td mat-cell *matCellDef="let element"> {{element.text}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="options">
+          <th mat-header-cell *matHeaderCellDef> Options </th>
+          <td mat-cell *matCellDef="let element"> {{element.options}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons [length]="countTotal"></mat-paginator>
+    </div>
+  </div>
+  <!-- <div class="mat-elevation-z8"> -->
+
+  <!-- </div> -->
+</div>
